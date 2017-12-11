@@ -3,25 +3,51 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class C_pages extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+	function __construct()
+	  {
+	    parent::__construct();
+			$this->load->library('cart');
+			$this->load->model('M_menu');
+	}
+
 	public function index()
 	{
+		$data = array(
+			'uri' => $this->uri->segment(1)
+		);
 
+		$this->load->view('user/template/header',$data);
 		$this->load->view('user/index');
-		// $this->load->view('test');
+		$this->load->view('user/template/footer');
+
+	}
+
+	public function register()
+	{
+
+		$this->load->view('user/template/header');
+		$this->load->view('user/register');
+		$this->load->view('user/template/footer');
+	}
+
+public function logout()
+{
+	session_destroy();
+	redirect('');
+}
+	public function login()
+	{
+		$newdata = array(
+			'logged_in' => TRUE
+		);
+		$this->session->set_userdata($newdata);
+		redirect('');
+	}
+	public function menu()
+	{
+		$data['menu'] = $this->M_menu->getMenu();
+		$this->load->view('user/template/header');
+		$this->load->view('user/menu');
+		$this->load->view('user/template/footer');
 	}
 }
