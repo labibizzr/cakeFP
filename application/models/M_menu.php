@@ -17,7 +17,7 @@ class M_menu extends CI_Model
       }
       else {
         $query = $this->db->get_where('menu', array('menu_id' => $id));
-        // echo var_dump($query);
+      
         return $query->result_array();
       }
 }

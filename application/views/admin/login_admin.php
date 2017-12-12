@@ -29,6 +29,8 @@
 	  form.password.focus();
 	  return (false);
 	}
+  else
+
   return (true);
   }
   </script>

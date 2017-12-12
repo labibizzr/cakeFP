@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2017 at 02:33 AM
+-- Generation Time: Dec 12, 2017 at 05:35 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.24
 
@@ -55,7 +55,7 @@ CREATE TABLE `customer` (
   `customer_id` int(255) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `password` varchar(15) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `name`, `email`, `password`) VALUES
-(1, 'test', 'test', 'test');
+(7, 'test', 'test@test.com', '$2y$10$VCV.DcRz3phAT9B326khquMmk3XqARc9Op1PyQnM0fr6HXaUSuVmq');
 
 -- --------------------------------------------------------
 
@@ -75,23 +75,21 @@ CREATE TABLE `customer_orders` (
   `order_id` int(11) NOT NULL,
   `customer_id` int(11) NOT NULL,
   `date_order_placed` date NOT NULL,
-  `zip` int(15) NOT NULL,
-  `deliv_point` varchar(15) NOT NULL,
-  `total_order_price` int(11) NOT NULL
+  `zip` varchar(15) NOT NULL,
+  `kota` varchar(25) NOT NULL,
+  `kecamatan` varchar(255) NOT NULL,
+  `jalan` varchar(105) NOT NULL,
+  `telephone` varchar(11) NOT NULL,
+  `status` varchar(25) NOT NULL,
+  `total` int(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `customer_order_menu`
+-- Dumping data for table `customer_orders`
 --
 
-CREATE TABLE `customer_order_menu` (
-  `id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `menu_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `customer_orders` (`order_id`, `customer_id`, `date_order_placed`, `zip`, `kota`, `kecamatan`, `jalan`, `telephone`, `status`, `total`) VALUES
+(7, 7, '2017-12-12', '60233', 'Surabaya Barat', 'jambangan', 'jalan', '081', 'standby', 250000);
 
 -- --------------------------------------------------------
 
@@ -114,6 +112,27 @@ CREATE TABLE `menu` (
 INSERT INTO `menu` (`menu_id`, `menu_name`, `menu_price`, `img`, `menu_detail`) VALUES
 (1, 'kue1', 10000, 'gambar_menu_1.jpg', 'tahan 5 jam'),
 (2, 'kue2', 15000, 'gambar_menu_2.png', 'tahan 10 jam');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_details`
+--
+
+CREATE TABLE `order_details` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `order_details`
+--
+
+INSERT INTO `order_details` (`id`, `order_id`, `menu_id`, `quantity`) VALUES
+(5, 7, 2, 10),
+(6, 7, 1, 10);
 
 --
 -- Indexes for dumped tables
@@ -145,16 +164,16 @@ ALTER TABLE `customer_orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
--- Indexes for table `customer_order_menu`
---
-ALTER TABLE `customer_order_menu`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `menu`
 --
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`menu_id`);
+
+--
+-- Indexes for table `order_details`
+--
+ALTER TABLE `order_details`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -169,22 +188,22 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `customer_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `customer_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `customer_orders`
 --
 ALTER TABLE `customer_orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `customer_order_menu`
---
-ALTER TABLE `customer_order_menu`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
   MODIFY `menu_id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `order_details`
+--
+ALTER TABLE `order_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

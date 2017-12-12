@@ -14,7 +14,7 @@ class C_admin extends CI_Controller {
 	public function index()
 	{
 
-		if($_SESSION['logged_in']){
+		if($_SESSION['logged_in_admin']){
 
 		$data['title'] = 'Home';
 		$this->load->view('admin/template/header', $data);
@@ -30,13 +30,13 @@ class C_admin extends CI_Controller {
 	{
 		$this->load->helper('form');
     $this->load->library('form_validation');
-		$_SESSION['logged_in'] = TRUE;
+		$_SESSION['logged_in_admin'] = TRUE;
 		$this->load->view('admin/login_admin');
 	}
 
 public function tabelMenu()
 {
-	if($_SESSION['logged_in']){
+	if($_SESSION['logged_in_admin']){
 
 	$data['menu'] = $this->M_menu->getMenu();
   $data['title'] = "Tabel Menu";
@@ -52,7 +52,7 @@ public function tabelMenu()
 
 public function editMenu($menu_id)
 {
-	if($_SESSION['logged_in']){
+	if($_SESSION['logged_in_admin']){
 
 		$this->load->library('form_validation');
 	$data['menu'] = $this->M_menu->getMenu($menu_id);
