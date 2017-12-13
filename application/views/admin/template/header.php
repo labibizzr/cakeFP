@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title><?php echo $title ?> - Cesale Admin</title>
+  <title><?php echo $title; ?> - Cesale Admin</title>
   <!-- Bootstrap core CSS-->
   <link href="<?php echo base_url(); ?>assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
@@ -66,7 +66,7 @@
       <ul class="navbar-nav ml-auto">
 
         <li class="nav-item">
-          <a class="nav-link">
+          <a href="<?php echo site_url('admin/changepassword'); ?>" class="nav-link">
             <i class="fa fa-fw fa-user"></i>Admin</a>
         </li>
         <li class="nav-item">

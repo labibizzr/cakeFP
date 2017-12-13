@@ -28,6 +28,14 @@ public function getOrderbyCustomerId($customer_id){
   return $query->result_array();
 }
 
+public function getDetailedOrder($id){
+  $this->db->select('*');
+  $this->db->from('customer_orders');
+  $this->db->join('customer','customer.customer_id = customer_orders.customer_id', 'join');
+  $query = $this->db->get();
+  $query = $query->result_array();
+  return $query;
+}
 public function createOrder(){
   $data = array(
     'customer_id' => $_SESSION['customer_id'],
@@ -51,4 +59,9 @@ public function editorder($data)
   $this->db->update('order', $data);
 }
 
+public function changeStatus($order_id){
+  $status = $this->input->post('status');
+  $this->db->where('order_id', $order_id);
+  $this->db->update('customer_orders',array('status' => $status ));
+}
 }

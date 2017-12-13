@@ -24,10 +24,7 @@ class C_pages extends CI_Controller {
 
 		$this->load->view('user/index');
 		$this->load->view('user/template/footer');
-
 	}
-
-
 
 	public function register()
 	{
@@ -167,6 +164,18 @@ public function basket()
 	$this->load->view('user/template/orderSidebar');
 	$this->load->view('user/template/footer');
 }
+}
+public function basketRemoveItem($rowid){
+	if(!isset($_SESSION['logged_in'])){
+		echo '<script language="javascript" type="text/javascript">
+		 			alert("Mohon login terlebih dahulu");
+					window.location = "' . site_url('register') .'"
+		 			</script>';
+	}
+	else{
+		$this->cart->remove($rowid);
+		redirect('basket');
+	}
 }
 public function customerOrderPage(){
 	if(!isset($_SESSION['logged_in'])){

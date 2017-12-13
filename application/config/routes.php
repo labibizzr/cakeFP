@@ -14,6 +14,12 @@ $route['admin/tabel/menu'] = 'C_admin/tabelMenu';
 $route['admin/tabel/menu/edit/(:num)'] = 'C_admin/editMenu/$1';
 $route['admin/tabel/menu/create'] = 'C_admin/createMenu';
 $route['admin/tabel/menu/delete/(:num)'] = 'C_admin/deleteMenu/$1';
+$route['admin/tabel/customer'] = 'C_admin/tabelCustomer';
+$route['admin/tabel/customer/delete/(:num)'] = 'C_admin/deleteCustomer/$1';
+$route['admin/tabel/order'] = 'C_admin/tabelOrder';
+$route['admin/changepassword'] = 'C_admin/adminChangePassword';
+$route['admin/tabel/order/changestatus/(:num)'] = 'C_admin/changeStatus/$1';
+$route['admin/customer_order/view/(:num)'] = 'C_admin/viewOrderDetails/$1';
 // user
 $route['menu'] = 'C_pages/menu';
 $route['basket'] = 'C_pages/basket';
@@ -26,6 +32,7 @@ $route['checkout'] = 'C_pages/checkout';
 $route['checkout1'] = 'C_pages/checkout1';
 $route['checkout2'] = 'C_pages/checkout2';
 $route['menu/add/(:num)'] = 'C_pages/addMenuCart/$1';
+$route['basket/delete/(:any)'] = 'C_pages/basketRemoveItem/$1';
 
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

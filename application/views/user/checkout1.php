@@ -31,7 +31,6 @@
                                             <input type="text" class="form-control" readonly id="firstname" value=<?php echo $_SESSION['nama']; ?> name='nama'>
                                         </div>
                                     </div>
-
                                 </div>
                                 <!-- /.row -->
 

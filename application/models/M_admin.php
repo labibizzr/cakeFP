@@ -8,6 +8,18 @@ class M_admin extends CI_Model
     // $table = 'users';
     $this->load->database();
   }
+  
+  function changePassword(){
+      $usernameAdmin = $this->input->post('username');
+      $passwordBaru = password_hash($this->input->post('passwordBaru'), PASSWORD_DEFAULT);
+      $data = array (
+        'username' => $usernameAdmin,
+        'password' => $passwordBaru);
+        // echo var_dump($data);
+      $this->db->where('admin_id',1);
+      $this->db->update('admin',$data);
+
+  }
 
   function login_authen(){
     $usernameAdmin = $this->input->post('username');
@@ -35,4 +47,5 @@ class M_admin extends CI_Model
     $this->session->set_userdata($newdata);
     return true;
   }
+
 }

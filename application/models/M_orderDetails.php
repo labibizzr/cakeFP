@@ -11,8 +11,6 @@ class M_orderDetails extends CI_Model
 
   public function getOrderDetails($id=FALSE){
 
-
-
         $result = $this->db->get_where('order_details', array('order_id' => $id))->result_array();
         $i = 0;
         foreach($result as $item){
@@ -21,7 +19,6 @@ class M_orderDetails extends CI_Model
           $i++;
         }
         return $data;
-
 }
 
 public function createOrderDetails($orderId){

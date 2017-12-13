@@ -47,7 +47,7 @@
                                         </td>
                                             <td>Rp <?php echo $items['price']; ?></td>
                                             <td>Rp <?php echo $items['subtotal']; ?></td>
-                                            <td><a href="#"><i class="fa fa-trash-o"></i></a>
+                                            <td><a href="<?php echo site_url('basket/delete/').$items['rowid']; ?>"><i class="fa fa-trash-o"></i></a>
                                             </td>
                                         </tr>
                                 <?php endforeach; ?>

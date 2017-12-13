@@ -8,16 +8,31 @@ class M_customer extends CI_Model
     // $table = 'users';
     $this->load->database();
   }
+  public function deleteCustomer($customer_id)
+  {
+    return $this->db->delete('customer', array('customer_id'=> $customer_id ));
+  }
+  public function getCustomer($id=FALSE){
+
+      if($id==FALSE){
+        $query = $this->db->get('customer');
+        return $query->result_array();
+      }
+      else {
+        $query = $this->db->get_where('customer', array('customer_id' => $id));
+
+        return $query->result_array();
+      }
+  }
 
   function createCustomer(){
-$data = array(
+    $data = array(
   'name' => $this->input->post('nama'),
   'email' => $this->input->post('email'),
   'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
 );
 $this->db->insert('customer', $data);
   }
-
   function login_authen(){
     $email = $this->input->post('emailUser');
     $password = $this->input->post('passwordUser');

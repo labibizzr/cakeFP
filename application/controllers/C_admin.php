@@ -8,6 +8,9 @@ class C_admin extends CI_Controller {
 			parent::__construct();
 			$this->load->model('M_menu');
 			$this->load->model('M_admin');
+			$this->load->model('M_order');
+			$this->load->model('M_orderDetails');
+			$this->load->model('M_customer');
 			$this->load->helper(array('form', 'url'));
 
 	}
@@ -51,6 +54,22 @@ public function tabelMenu()
 
 	$this->load->view('admin/template/header',$data);
 	$this->load->view('admin/tabelMenu',$data);
+	$this->load->view('admin/template/footer');
+	}
+	else {
+	redirect('admin/login');
+	}
+}
+
+public function tabelOrder()
+{
+	if($_SESSION['logged_in_admin']){
+
+	$data['menu'] = $this->M_menu->getMenu();
+  $data['title'] = "Tabel Menu";
+	$data['orders'] = $this->M_order->getOrder();
+	$this->load->view('admin/template/header',$data);
+	$this->load->view('admin/tabelOrder',$data);
 	$this->load->view('admin/template/footer');
 	}
 	else {
@@ -170,7 +189,89 @@ public function deleteMenu($menu_id)
 		$this->M_menu->deleteMenu($menu_id);
 		redirect('admin/tabel/menu');
 	}
+	else {
+	redirect('admin/login');
+	}
+}
 
+public function adminChangePassword()
+ {
+	 if($_SESSION['logged_in_admin']){
+	 $data['title'] = 'Ganti password admin';
+	 $this->load->helper('form');
+	 $this->load->library('form_validation');
+	 $this->form_validation->set_rules('username', 'username', 'required');
+	 $this->form_validation->set_rules('passwordBaru', 'passwordBaru', 'required');
+	 if ($this->form_validation->run() == FALSE){
+	 $this->load->view('admin/template/header',$data);
+	 $this->load->view('admin/adminChangePassword',$data);
+	 $this->load->view('admin/template/footer');
+		 }
+		 else{
+		 $this->M_admin->changePassword();
+		 redirect('admin');
+		 }
+	 }
+ }
+public function viewOrderDetails($order_id){
+	 if($_SESSION['logged_in_admin']){
+$data['title'] = 'Menampilkan order';
+$data['order'] = $this->M_order->getDetailedOrder($order_id);
+$data['details'] = $this->M_orderDetails->getOrderDetails($order_id);
+$this->load->helper('form');
+$this->load->view('admin/template/header',$data);
+$this->load->view('admin/orderDetail',$data);
+$this->load->view('admin/template/footer');
+}
+else {
+	redirect('admin/login');
+}
+}
+
+public function tabelCustomer(){
+	if($_SESSION['logged_in_admin']){
+$data['title'] = 'Tabel Customer';
+$data['customer'] = $this->M_customer->getCustomer();
+$this->load->view('admin/template/header',$data);
+$this->load->view('admin/tabelCustomer',$data);
+$this->load->view('admin/template/footer');
+	}
+	else{
+		redirect('admin/login');
+	}
+}
+public function deleteCustomer($customer_id){
+	if($_SESSION['logged_in_admin']){
+		$this->M_customer->deleteMenu($menu_id);
+		redirect('admin/tabel/menu');
+	}
+	else {
+	redirect('admin/login');
+	}
+}
+public function changeStatus($order_id)
+{
+	if($_SESSION['logged_in_admin']){
+
+	$this->load->library('form_validation');
+	$this->form_validation->set_rules('status', 'status', 'required');
+
+	if ($this->form_validation->run() == FALSE)
+	        {
+	$data['error'] = '';
+	$data['order_id'] = $order_id;
+	$data['title'] = 'Change order status';
+	$this->load->view('admin/template/header',$data);
+	$this->load->view('admin/form/changeStatus',$data);
+	$this->load->view('admin/template/footer');
+					}
+	else
+                {
+
+											$this->M_order->changeStatus($order_id);
+                      redirect('admin/tabel/order');
+                }
+}
 
 	else {
 	redirect('admin/login');
