@@ -30,7 +30,7 @@
                       <td><?php echo $menu_item['menu_name']; ?></td>
                       <td><?php echo $menu_item['menu_price']; ?></td>
                       <td>
-                      
+
                         <img class = 'img-responsive' height = '150' width = '150' src='<?php echo base_url('assets/uploads/') . $menu_item['img']; ?>'>
                       </td>
 
@@ -43,7 +43,7 @@
                   </tbody>
                 </table>
               </div>
-              <?php echo anchor(site_url(uri_string(). "/create"), 'Buat dosen baru', array('title' => 'Buat dosen baru', 'class' => 'btn btn-primary')); ?>
+              <?php echo anchor(site_url(uri_string(). "/create"), 'Buat menu baru', array('title' => 'Buat dosen baru', 'class' => 'btn btn-primary')); ?>
             </div>
             </div>
       </div>

@@ -42,11 +42,11 @@
       <div class="card-body">
         <?php
             $frm_login = array('onsubmit' => 'return validasi(this)');
-            echo form_open('admin', $frm_login);
+            echo form_open('admin/login', $frm_login);
            ?>
 
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
+            <label for="exampleInputEmail1">Username</label>
             <!-- <input class="form-control" id="exampleInputEmail1" type="email" aria-describedby="emailHelp" placeholder="Enter email"> -->
             <?php $txtuser = array('name' => 'username', 'class' => 'form-control', 'placeholder' => 'Masukan Username', 'autofocus' =>'autofocus');
     	     echo form_input($txtuser);?>

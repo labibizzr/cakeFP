@@ -12,6 +12,8 @@ $route['admin/tabel/order'] = 'C_admin/tabelOrder';
 $route['admin/tabel/customer'] = 'C_admin/tabelCustomer';
 $route['admin/tabel/menu'] = 'C_admin/tabelMenu';
 $route['admin/tabel/menu/edit/(:num)'] = 'C_admin/editMenu/$1';
+$route['admin/tabel/menu/create'] = 'C_admin/createMenu';
+$route['admin/tabel/menu/delete/(:num)'] = 'C_admin/deleteMenu/$1';
 // user
 $route['menu'] = 'C_pages/menu';
 $route['basket'] = 'C_pages/basket';
